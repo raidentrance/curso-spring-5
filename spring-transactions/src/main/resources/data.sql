@@ -1,0 +1,2 @@
+insert into post (id, name,content,author )values(1, 'Spring jdbc', 'Spring is a framework that allows using spring jdbc','@raidentrance');
+insert into author (id, name,twitter )values(1, 'Alex agapo', '@raidentrance');
