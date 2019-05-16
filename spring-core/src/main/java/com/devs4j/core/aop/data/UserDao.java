@@ -5,12 +5,14 @@ package com.devs4j.core.aop.data;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.annotation.PostConstruct;
 
 import org.springframework.stereotype.Repository;
 
 import com.devs4j.spring.models.credentials.User;
+import com.devs4j.spring.models.error.AuthenticationFailedException;
 
 /**
  * @author maagapi
@@ -30,5 +32,15 @@ public class UserDao {
 
 	public User findByUsername(String username) {
 		return users.stream().filter(u -> u.getUsername().equals(username)).findFirst().orElse(null);
+	}
+
+	public User authenticate(String username, String password) {
+		Optional<User> user = users.stream()
+				.filter(u -> u.getUsername().equals(username) && u.getPassword().equals(password)).findFirst();
+		if (user.isPresent()) {
+			return user.get();
+		} else {
+			throw new AuthenticationFailedException(String.format("Authentication failure for %s", username));
+		}
 	}
 }

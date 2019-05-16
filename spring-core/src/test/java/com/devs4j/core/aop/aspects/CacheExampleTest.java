@@ -13,7 +13,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.devs4j.core.aop.aspects.CacheAroundAdvice;
+import com.devs4j.core.aop.aspects.AspectCache;
 import com.devs4j.core.aop.data.PersonComplexDao;
 import com.devs4j.core.config.JacksonConfig;
 import com.devs4j.core.config.JedisConfig;
@@ -24,8 +24,8 @@ import com.devs4j.spring.models.people.Person;
  *
  */
 @RunWith(SpringRunner.class)
-@ContextConfiguration(classes = { PersonComplexDao.class, CacheAroundAdvice.class, JacksonConfig.class,
-		JedisConfig.class, BeforeAdviceLoggerExample.class })
+@ContextConfiguration(classes = { PersonComplexDao.class, AspectCache.class, JacksonConfig.class,
+		JedisConfig.class, LoggerAspectExample.class })
 @EnableAspectJAutoProxy
 public class CacheExampleTest {
 

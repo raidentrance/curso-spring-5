@@ -22,9 +22,9 @@ import com.devs4j.spring.models.credentials.User;
  */
 @Aspect
 @Component
-public class HidePasswordAfterExecution {
+public class HidePasswordAfterUserExecutionAspect {
 
-	private static final Logger log = LoggerFactory.getLogger(HidePasswordAfterExecution.class);
+	private static final Logger log = LoggerFactory.getLogger(HidePasswordAfterUserExecutionAspect.class);
 
 	@AfterReturning(pointcut = "execution(com.devs4j.spring.models.credentials.User com.devs4j.core.aop.data.*.*(..))", returning = "user")
 	public void hidePassword(JoinPoint joinPoint, User user) {

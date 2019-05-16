@@ -9,9 +9,9 @@ import org.springframework.stereotype.Component;
 
 @Aspect
 @Component
-public class BeforeAdviceLoggerExample {
+public class LoggerAspectExample {
 
-	private static final Logger log = LoggerFactory.getLogger(BeforeAdviceLoggerExample.class);
+	private static final Logger log = LoggerFactory.getLogger(LoggerAspectExample.class);
 
 	@Before("execution(* com.devs4j.core.aop.*.*.*(..))")
 	public void printBefore(JoinPoint joinPoint) {

@@ -25,7 +25,7 @@ import redis.clients.jedis.Jedis;
  */
 @Component
 @Aspect
-public class CacheAroundAdvice {
+public class AspectCache {
 
 	@Autowired
 	private Jedis client;
@@ -33,7 +33,7 @@ public class CacheAroundAdvice {
 	@Autowired
 	private ObjectMapper mapper;
 
-	private static final Logger log = LoggerFactory.getLogger(CacheAroundAdvice.class);
+	private static final Logger log = LoggerFactory.getLogger(AspectCache.class);
 
 	@Around("@annotation(com.devs4j.core.aop.annotation.Devs4jCache)")
 	public Object cache(ProceedingJoinPoint joinPoint) throws Throwable {
