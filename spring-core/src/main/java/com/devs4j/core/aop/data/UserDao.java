@@ -43,4 +43,8 @@ public class UserDao {
 			throw new AuthenticationFailedException(String.format("Authentication failure for %s", username));
 		}
 	}
+
+	public User authenticate(String clientId, String clientSecret, String transaction) {
+		throw new UnsupportedOperationException("Unsupported operation ");
+	}
 }
