@@ -1,4 +1,4 @@
-package com.devs4j.core.services.autowired.environments;
+package com.devs4j.core.autowiring.environments;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;

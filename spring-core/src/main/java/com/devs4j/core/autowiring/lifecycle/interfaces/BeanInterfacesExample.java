@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.devs4j.core.services.autowired.lifecycle.interfaces;
+package com.devs4j.core.autowiring.lifecycle.interfaces;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +25,6 @@ public class BeanInterfacesExample implements InitializingBean, DisposableBean {
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		log.info("After properties method");
-
 	}
 
 	@Override

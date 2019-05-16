@@ -1,4 +1,4 @@
-package com.devs4j.core.services.autowired.lifecycle.processors;
+package com.devs4j.core.autowiring.lifecycle.processors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -7,7 +7,7 @@ import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.stereotype.Component;
 
-import com.devs4j.core.services.autowired.lifecycle.NotInSpringBean;
+import com.devs4j.core.autowiring.lifecycle.NotInSpringBean;
 
 /**
  * 

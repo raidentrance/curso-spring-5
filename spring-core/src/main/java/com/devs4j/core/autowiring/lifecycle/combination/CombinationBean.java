@@ -1,4 +1,4 @@
-package com.devs4j.core.services.autowired.lifecycle.combination;
+package com.devs4j.core.autowiring.lifecycle.combination;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
