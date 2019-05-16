@@ -8,6 +8,6 @@ Material para el curso Spring framework 5 + REST impartido por https://www.devs4
 - **spring-mvc**: Contiene ejemplos básicos sobre como crear una aplicación web utilizando spring mvc.
 - **spring-transactions**: Contiene ejemplos sobre manejo, propagación e aislamiento de transacciones.
 
-Para construir el proyecto utilizar el siguiente comando:
+Para construir ejecutar:
 
 `mvn clean install`
