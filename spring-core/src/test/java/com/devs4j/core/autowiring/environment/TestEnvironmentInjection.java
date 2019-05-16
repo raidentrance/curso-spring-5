@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.devs4j.core.environment;
+package com.devs4j.core.autowiring.environment;
 
 import static org.junit.Assert.assertEquals;
 
