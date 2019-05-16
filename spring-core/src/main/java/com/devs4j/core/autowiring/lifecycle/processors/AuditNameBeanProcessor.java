@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import com.devs4j.core.autowiring.lifecycle.combination.CombinationBean;
 
 /**
+ * 
  * @author raidentrance
  *
  */
