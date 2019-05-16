@@ -13,8 +13,13 @@ public class BeforeAdviceExample {
 
 	private static final Logger log = LoggerFactory.getLogger(BeforeAdviceExample.class);
 
-	@Before("execution(* com.devs4j.core.aop.service.HelloWorldService.hello(..))")
+	@Before("execution(* com.devs4j.core.aop.data.PersonComplexDao.*(..))")
 	public void printBefore(JoinPoint joinPoint) {
 		log.info("Before advice for method {}", joinPoint.getSignature().getName());
+		Object[] args = joinPoint.getArgs();
+
+		for (Object arg : args) {
+			log.info("arg = {}", arg);
+		}
 	}
 }
