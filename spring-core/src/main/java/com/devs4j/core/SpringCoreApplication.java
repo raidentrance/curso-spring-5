@@ -39,9 +39,9 @@ public class SpringCoreApplication {
 
 	public static void cacheExample(ApplicationContext applicationContext) {
 		PersonComplexDao complexDao = applicationContext.getBean(PersonComplexDao.class);
-		Person person = complexDao.findByRfc("AABA88384");
+		Person person = complexDao.findByRfc("JASA23849");
 		log.info("Person found {} ", person);
-		Person person2 = complexDao.findByRfc("AABA88384");
+		Person person2 = complexDao.findByRfc("JASA23849");
 		log.info("Person found {} ", person2);
 	}
 

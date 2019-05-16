@@ -10,6 +10,8 @@ import java.util.Random;
 
 import javax.annotation.PostConstruct;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.devs4j.core.aop.annotation.Devs4jCache;
@@ -24,6 +26,8 @@ import com.devs4j.spring.models.people.Person;
 public class PersonComplexDao {
 
 	private List<Person> people;
+
+	private static final Logger log = LoggerFactory.getLogger(PersonComplexDao.class);
 
 	@PostConstruct
 	public void init() {
@@ -44,6 +48,7 @@ public class PersonComplexDao {
 
 	@Devs4jCache(collection = "people-by-rfc", classType = Person.class)
 	public Person findByRfc(String rfc) {
+		addDelay();
 		return people.stream().filter(p -> p.getRfc().equals(rfc)).findAny().orElse(null);
 	}
 
@@ -58,7 +63,9 @@ public class PersonComplexDao {
 
 	private void addDelay() {
 		try {
-			Thread.sleep(new Random().nextInt(5000));
+			int randomInt = new Random().nextInt(10000);
+			log.info("Waiting {} miliseconds", randomInt);
+			Thread.sleep(randomInt);
 		} catch (InterruptedException e) {
 			throw new GeneralRuntimeException(e.getMessage());
 		}

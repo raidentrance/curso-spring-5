@@ -6,6 +6,8 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -30,13 +32,15 @@ public class CacheAroundAdvice {
 
 	private ObjectMapper mapper = new ObjectMapper();
 
+	private static final Logger log = LoggerFactory.getLogger(CacheAroundAdvice.class);
+
 	@Around("@annotation(com.devs4j.core.aop.annotation.Devs4jCache)")
 	public Object cache(ProceedingJoinPoint joinPoint) throws Throwable {
 		Devs4jCache annotation = getAnnotationFromSignature(joinPoint);
 		String collection = annotation.collection();
 		String key = getFirstStringArgument(joinPoint);
 		if (key != null) {
-			Object result = getFromCache(collection, key, annotation.annotationType());
+			Object result = getFromCache(collection, key, annotation.classType());
 			if (result != null) {
 				return result;
 			} else {
@@ -51,9 +55,10 @@ public class CacheAroundAdvice {
 		String response = client.get(getKeyFromCollectionAndKey(collection, key));
 		if (response != null) {
 			try {
+				log.info("Retriving from cache {}", key);
 				return mapper.readValue(response, type);
 			} catch (IOException e) {
-				throw new GeneralRuntimeException(String.format("Error retriving value from cache %s", key));
+				throw new GeneralRuntimeException(String.format("Error retriving value from cache %s", key), e);
 			}
 		} else {
 			return null;
@@ -62,9 +67,10 @@ public class CacheAroundAdvice {
 
 	public Object saveInCache(String collection, String key, Object result) {
 		try {
+			log.info("Saving key in the cache {}", key);
 			client.set(getKeyFromCollectionAndKey(collection, key), mapper.writeValueAsString(result));
 		} catch (JsonProcessingException e) {
-			throw new GeneralRuntimeException(String.format("Error storing value in cache %s", key));
+			throw new GeneralRuntimeException(String.format("Error storing value in cache %s", key), e);
 		}
 
 		return null;
@@ -78,7 +84,7 @@ public class CacheAroundAdvice {
 		return (joinPoint.getArgs()[0] != null) ? joinPoint.getArgs()[0].toString() : null;
 	}
 
-	public Devs4jCache getAnnotationFromSignature(ProceedingJoinPoint joinPoint) {
+	private Devs4jCache getAnnotationFromSignature(ProceedingJoinPoint joinPoint) {
 		MethodSignature signature = (MethodSignature) joinPoint.getSignature();
 		return signature.getMethod().getAnnotation(Devs4jCache.class);
 	}
