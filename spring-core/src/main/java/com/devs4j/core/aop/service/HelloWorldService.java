@@ -10,7 +10,7 @@ public class HelloWorldService {
 	
 	private static final Logger log = LoggerFactory.getLogger(HelloWorldService.class);
 
-	public void hello(){
-		log.info("Hello world service ");
+	public void hello(String name){
+		log.info("Hello world service {}",name);
 	}
 }

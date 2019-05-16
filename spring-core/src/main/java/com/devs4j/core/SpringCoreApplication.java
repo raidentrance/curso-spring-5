@@ -37,17 +37,8 @@ public class SpringCoreApplication {
 
 	}
 
-	public static void cacheExample(ApplicationContext applicationContext) {
-		PersonComplexDao complexDao = applicationContext.getBean(PersonComplexDao.class);
-		Person person = complexDao.findByRfc("JASA23849");
-		log.info("Person found {} ", person);
-		Person person2 = complexDao.findByRfc("JASA23849");
-		log.info("Person found {} ", person2);
-	}
-
 	public static void main(String[] args) {
 		ConfigurableApplicationContext applicationContext = SpringApplication.run(SpringCoreApplication.class, args);
-		cacheExample(applicationContext);
 	}
 
 }
