@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.devs4j.spring.profiles;
+package com.devs4j.core.profiles;
 
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;

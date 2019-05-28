@@ -12,7 +12,6 @@ import com.devs4j.spring.dao.AuthorDao;
 import com.devs4j.spring.dao.PostDao;
 import com.devs4j.spring.models.author.Author;
 import com.devs4j.spring.models.author.Post;
-import com.devs4j.spring.profiles.Environment;
 import com.devs4j.spring.services.AuthorService;
 
 @SpringBootApplication
@@ -80,11 +79,9 @@ public class SpringTransactionsApplication {
 
 	public static void main(String[] args) throws SQLException {
 		ConfigurableApplicationContext context = SpringApplication.run(SpringTransactionsApplication.class, args);
-		// developerTransactions(context);
+		 developerTransactions(context);
 		// declarativeTransactions(context);
 //		propagationLevels(context);
-		Environment environment = context.getBean("devEnvironment",Environment.class);
-		System.out.println(environment.getEnvironment());
 	}
 
 }

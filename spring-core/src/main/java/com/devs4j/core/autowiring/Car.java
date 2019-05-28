@@ -1,4 +1,4 @@
-package com.devs4j.core.services.autowired;
+package com.devs4j.core.autowiring;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

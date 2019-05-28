@@ -11,7 +11,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 
 import com.devs4j.core.aop.data.PersonComplexDao;
-import com.devs4j.core.services.autowired.lifecycle.NotInSpringBean;
+import com.devs4j.core.autowiring.lifecycle.NotInSpringBean;
 import com.devs4j.spring.models.people.Person;
 
 @SpringBootApplication

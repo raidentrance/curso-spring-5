@@ -1,4 +1,4 @@
-package com.devs4j.spring.profiles;
+package com.devs4j.core.profiles;
 
 public interface Environment {
 

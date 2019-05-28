@@ -12,7 +12,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.devs4j.core.services.autowired.environments.EnvironmentInjection;
+import com.devs4j.core.autowiring.environment.EnvironmentInjection;
 
 /**
  * @author raidentrance

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.devs4j.core.services.autowired.lifecycle.processors;
+package com.devs4j.core.autowiring.lifecycle.processors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,7 +9,7 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.stereotype.Component;
 
-import com.devs4j.core.services.autowired.lifecycle.combination.CombinationBean;
+import com.devs4j.core.autowiring.lifecycle.combination.CombinationBean;
 
 /**
  * @author raidentrance
