@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package com.devs4j.core.profiles;
 
 import org.springframework.context.annotation.Primary;
@@ -9,10 +12,10 @@ import org.springframework.stereotype.Component;
  * @author raidentrance
  *
  */
-@Component("devEnvironment")
+@Component
 @Profile(value={"dev","local","default"})
 @Primary
-public class DevEnvironment implements Environment {
+public class DevEnvironment implements ApplicationEnvironment {
 
 	@Override
 	public String getEnvironment() {

@@ -40,11 +40,11 @@ public class PrototypeLifeCycleCallback {
 		log.info("Foo");
 	}
 
-	@PreDestroy
 	/**
 	 * Pre destroy no funciona en prototype beans dado que este bean será
 	 * elegible por el garbage colector una vez que se termina de utilizar.
 	 */
+	@PreDestroy
 	public void end() {
 		log.info("Prototype end method");
 	}

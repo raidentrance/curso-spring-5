@@ -25,7 +25,6 @@ public class BeanInterfacesExample implements InitializingBean, DisposableBean {
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		log.info("After properties method");
-
 	}
 
 	@Override

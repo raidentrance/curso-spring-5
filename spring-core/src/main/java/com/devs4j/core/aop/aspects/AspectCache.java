@@ -1,4 +1,4 @@
-package com.devs4j.core.aop.advices;
+package com.devs4j.core.aop.aspects;
 
 import java.io.IOException;
 
@@ -25,21 +25,22 @@ import redis.clients.jedis.Jedis;
  */
 @Component
 @Aspect
-public class CacheAroundAdvice {
+public class AspectCache {
 
 	@Autowired
 	private Jedis client;
 
-	private ObjectMapper mapper = new ObjectMapper();
+	@Autowired
+	private ObjectMapper mapper;
 
-	private static final Logger log = LoggerFactory.getLogger(CacheAroundAdvice.class);
+	private static final Logger log = LoggerFactory.getLogger(AspectCache.class);
 
 	@Around("@annotation(com.devs4j.core.aop.annotation.Devs4jCache)")
 	public Object cache(ProceedingJoinPoint joinPoint) throws Throwable {
 		Devs4jCache annotation = getAnnotationFromSignature(joinPoint);
 		String collection = annotation.collection();
 		String key = getFirstStringArgument(joinPoint);
-		if (key != null) {
+		if (key != null && client.isConnected()) {
 			Object result = getFromCache(collection, key, annotation.classType());
 			if (result != null) {
 				return result;
@@ -47,6 +48,7 @@ public class CacheAroundAdvice {
 				return saveInCache(collection, key, joinPoint.proceed());
 			}
 		} else {
+			log.info("Redis was not queried Key {}, is connected {}", key, client.isConnected());
 			return joinPoint.proceed();
 		}
 	}

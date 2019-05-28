@@ -10,9 +10,9 @@ import org.springframework.stereotype.Component;
  * @author raidentrance
  *
  */
-@Component("prodEnvironment")
+@Component
 @Profile("prod")
-public class ProdEnvironment implements Environment {
+public class ProdEnvironment implements ApplicationEnvironment{
 
 	@Override
 	public String getEnvironment() {

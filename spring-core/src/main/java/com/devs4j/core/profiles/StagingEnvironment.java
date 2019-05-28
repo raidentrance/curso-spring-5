@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
  *
  */
 @Profile("stg")
-@Component("stagingEnvironment")
-public class StagingEnvironment implements Environment{
+@Component
+public class StagingEnvironment implements ApplicationEnvironment{
 
 	@Override
 	public String getEnvironment() {

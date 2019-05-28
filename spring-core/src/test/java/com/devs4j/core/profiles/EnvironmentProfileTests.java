@@ -5,7 +5,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
@@ -18,16 +17,13 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class EnvironmentProfileTests {
 
 	@Autowired(required = false)
-	@Qualifier("devEnvironment")
-	private Environment devEnvironment;
+	private DevEnvironment devEnvironment;
 
 	@Autowired(required = false)
-	@Qualifier("stagingEnvironment")
-	private Environment stgEnvironment;
+	private StagingEnvironment stgEnvironment;
 
 	@Autowired(required = false)
-	@Qualifier("prodEnvironment")
-	private Environment prodEnvironment;
+	private ProdEnvironment prodEnvironment;
 
 	@Test
 	public void testEnvironment() {
