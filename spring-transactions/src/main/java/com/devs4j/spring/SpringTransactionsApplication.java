@@ -32,11 +32,11 @@ public class SpringTransactionsApplication {
 
 		try {
 			List<Post> posts = new ArrayList<>();
-			posts.add(new Post(1, "Jpa", "Java Persistence api", "@raidentrance"));
-			posts.add(new Post(2, "Hibernate", "Jboss hibernate", "@raidentrance"));
-			posts.add(new Post(3, "Jsf", "Java serverFaces", "@raidentrance"));
-			posts.add(new Post(3, "Jsf", "Java serverFaces", "@raidentrance"));
-			dao.createWithTransactionManager(posts);
+			posts.add(new Post(2, "Jpa", "Java Persistence api", "@raidentrance"));
+			posts.add(new Post(3, "Hibernate", "Jboss hibernate", "@raidentrance"));
+			posts.add(new Post(4, "Jsf", "Java serverFaces", "@raidentrance"));
+//			posts.add(new Post(4, "Jsf", "Java serverFaces", "@raidentrance"));
+			dao.createWithTransactionTemplate(posts);
 		} catch (SQLException e) {
 			System.err.println(e);
 		} catch (RuntimeException e) {
@@ -73,14 +73,10 @@ public class SpringTransactionsApplication {
 		}
 	}
 
-	public static void isolationLevels(ConfigurableApplicationContext context) throws SQLException {
-
-	}
-
 	public static void main(String[] args) throws SQLException {
 		ConfigurableApplicationContext context = SpringApplication.run(SpringTransactionsApplication.class, args);
-		 developerTransactions(context);
-		// declarativeTransactions(context);
+//		 developerTransactions(context);
+		 declarativeTransactions(context);
 //		propagationLevels(context);
 	}
 

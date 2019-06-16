@@ -9,7 +9,6 @@ import javax.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -45,7 +44,8 @@ public class AuthorDao {
 		});
 	}
 
-	@Transactional(noRollbackFor = DuplicateKeyException.class)
+//	@Transactional(noRollbackFor = DuplicateKeyException.class)
+	@Transactional
 	public void create(List<Author> authors) throws SQLException {
 		for (Author author : authors) {
 			jdbcTemplate.update("insert into author (id, name, twitter)values(?,?,?)", author.getId(), author.getName(),

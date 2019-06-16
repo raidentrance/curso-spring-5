@@ -15,6 +15,8 @@ import javax.sql.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
@@ -36,6 +38,9 @@ public class PostDao {
 
 	@Autowired
 	private PlatformTransactionManager transactionManager;
+
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
 
 	@Autowired
 	private TransactionTemplate transactionTemplate;
@@ -75,16 +80,16 @@ public class PostDao {
 	}
 
 	public void createWithTransactionManager(List<Post> posts) throws SQLException {
-		Connection connection = dataSource.getConnection();
 		DefaultTransactionDefinition transactionDefinition = new DefaultTransactionDefinition();
 		TransactionStatus status = transactionManager.getTransaction(transactionDefinition);
 		for (Post post : posts) {
 			try {
-				PreparedStatement ps = toPreparedStatement(post, connection);
-				ps.executeUpdate();
-			} catch (SQLException e) {
+				jdbcTemplate.update("insert into post (id, name,content,author )values(?,?, ?,?)", post.getId(),
+						post.getName(), post.getContent(), post.getAuthor());
+			} catch (DataAccessException e) {
 				System.err.println(e);
 				transactionManager.rollback(status);
+				throw e;
 			}
 		}
 		transactionManager.commit(status);
@@ -94,19 +99,14 @@ public class PostDao {
 		transactionTemplate.execute(new TransactionCallbackWithoutResult() {
 			@Override
 			protected void doInTransactionWithoutResult(TransactionStatus status) {
-				try {
-					Connection connection = dataSource.getConnection();
-					for (Post post : posts) {
-						try {
-							PreparedStatement ps = toPreparedStatement(post, connection);
-							ps.executeUpdate();
-						} catch (SQLException e) {
-							System.err.println(e);
-							throw new RuntimeException();
-						}
+				for (Post post : posts) {
+					try {
+						jdbcTemplate.update("insert into post (id, name,content,author )values(?,?, ?,?)", post.getId(),
+								post.getName(), post.getContent(), post.getAuthor());
+					} catch (DataAccessException e) {
+						System.err.println(e);
+						throw new RuntimeException();
 					}
-				} catch (SQLException e1) {
-					System.err.println(e1);
 				}
 			}
 		});
